@@ -63,10 +63,6 @@ function playGame(){
 
 }
 
-
-// console.log("You :", humanSelection) 
-
-// console.log("computer :" , computerSelection)
 playGame()
 
 
