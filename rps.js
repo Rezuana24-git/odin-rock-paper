@@ -26,9 +26,14 @@ function getComputerChoice(){
 function playGame(){
     let humanScore = 0;
     let computerScore = 0;
+    let gameOver = false
     let resultDiv = document.querySelector(".result")
     function playRound(humanChoice , computerChoice){
-        humanChoice= humanChoice.toLowerCase()
+        if (gameOver){
+            return;
+        }
+        else{
+            humanChoice= humanChoice.toLowerCase()
         if (humanChoice === computerChoice){
             // console.log(`It's a tie! you both chose ${humanChoice}`)
             resultDiv.textContent = `It's a tie! you both chose ${humanChoice}`
@@ -36,7 +41,7 @@ function playGame(){
         else if ((humanChoice === "rock" && computerChoice === "scissors") || ( humanChoice === "scissors" && computerChoice === "paper") || (humanChoice=== "paper" && computerChoice === "rock")){
             humanScore += 1
             // console.log(`Congrats you win the game! ${humanChoice} beats ${computerChoice}.`)
-            resultDiv.textContent= `Congrats you win the game! ${humanChoice} beats ${computerChoice}.`
+            resultDiv.textContent= `Congrats you win! ${humanChoice} beats ${computerChoice}.`
         }
         else{
             computerScore += 1
@@ -44,6 +49,9 @@ function playGame(){
             resultDiv.textContent= `Ohh sorry you lose! ${computerChoice} beats ${humanChoice}.`
         }
         updateScore()
+        checkWinner()
+        }
+        
     }
     // for (let i= 1 ; i < 6; i++){
         
@@ -91,6 +99,17 @@ function playGame(){
         scoreDiv.textContent = `Score - You: ${humanScore}, Computer: ${computerScore}`
     }
     updateScore()
+
+    function checkWinner (){
+        if (humanScore == 5){
+            resultDiv.textContent = "Congratulation you'er the winner!"
+            gameOver = true
+        }
+        else if (computerScore == 5){
+            resultDiv.textContent = "Sorry! you lose the game"
+            gameOver = false
+        }
+    }
 }
 
 playGame()
