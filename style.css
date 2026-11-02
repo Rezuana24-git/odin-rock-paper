@@ -51,6 +51,18 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+.head h2 {
+  width: 100%;
+  margin: 0 0 16px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  background: linear-gradient(90deg, #fbbf24, #f472b6, #818cf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 
 .head button {
   font-family: inherit;
