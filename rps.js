@@ -108,7 +108,7 @@ function playGame(){
 
     function checkWinner (){
         if (humanScore >= 5){
-            resultDiv.textContent = "Congratulation you'er the winner!"
+            resultDiv.textContent = "Congratulation you're the winner!"
             endGame()
         }
         else if (computerScore >= 5){
