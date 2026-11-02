@@ -27,13 +27,30 @@ function playGame(){
     let humanScore = 0;
     let computerScore = 0;
     let gameOver = false
-    let resultDiv = document.querySelector(".result")
+    const resultDiv = document.querySelector(".result")
+    const scoreDiv = document.querySelector(".score")
+
+    const head = document.querySelector(".head")
+    const btn1 = document.createElement("button")
+    const btn2 = document.createElement("button")
+    const btn3 = document.createElement("button")
+    
+
+    btn1.textContent = "rock"
+    btn2.textContent = "paper"
+    btn3.textContent = "scissors"
+    
+    const playAgain = document.createElement("button")
+    playAgain.textContent = "Play again"
+    playAgain.hidden = true
+    head.append(btn1 , btn2 ,btn3, playAgain)
+
     function playRound(humanChoice , computerChoice){
         if (gameOver){
             return;
         }
-        else{
-            humanChoice= humanChoice.toLowerCase()
+
+        humanChoice= humanChoice.toLowerCase()
         if (humanChoice === computerChoice){
             // console.log(`It's a tie! you both chose ${humanChoice}`)
             resultDiv.textContent = `It's a tie! you both chose ${humanChoice}`
@@ -50,8 +67,6 @@ function playGame(){
         }
         updateScore()
         checkWinner()
-        }
-        
     }
     // for (let i= 1 ; i < 6; i++){
         
@@ -60,15 +75,7 @@ function playGame(){
     //     const computerSelection = getComputerChoice()
     //     playRound(humanSelection, computerSelection)
     // }
-    const head = document.querySelector(".head")
-    const btn1 = document.createElement("button")
-    const btn2 = document.createElement("button")
-    const btn3 = document.createElement("button")
-    btn1.textContent = "rock"
-    btn2.textContent = "paper"
-    btn3.textContent = "scissors"
 
-    head.append(btn1 , btn2 ,btn3)
     btn1.addEventListener("click", (e)=>{
         const computerSelection = getComputerChoice()
         playRound(e.target.textContent, computerSelection)
@@ -81,7 +88,6 @@ function playGame(){
         const computerSelection = getComputerChoice()
         playRound(e.target.textContent, computerSelection)
     })
-    const scoreDiv = document.querySelector(".score")
     // console.log(`Final score - You: ${humanScore}, Computer: ${computerScore}`)
     // if (humanScore == computerScore){
     //     console.log(`You both got the same score! ${humanScore}`)
@@ -101,15 +107,35 @@ function playGame(){
     updateScore()
 
     function checkWinner (){
-        if (humanScore == 5){
+        if (humanScore >= 5){
             resultDiv.textContent = "Congratulation you'er the winner!"
-            gameOver = true
+            endGame()
         }
-        else if (computerScore == 5){
+        else if (computerScore >= 5){
             resultDiv.textContent = "Sorry! you lose the game"
-            gameOver = false
+            endGame()
         }
     }
+   function endGame(){
+    gameOver = true
+    playAgain.hidden = false
+    btn1.disabled = true
+    btn2.disabled = true
+    btn3.disabled = true
+   }
+
+    playAgain.addEventListener("click", ()=>{
+        playAgain.hidden = true;
+        humanScore =0 
+        computerScore =0
+        gameOver = false
+        resultDiv.textContent = ""
+        btn1.disabled = false
+        btn2.disabled = false
+        btn3.disabled = false
+        updateScore()
+    })
+    
 }
 
 playGame()
